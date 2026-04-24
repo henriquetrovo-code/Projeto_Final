@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EstoqueController">
+   <children>
+      <Label layoutX="20.0" layoutY="20.0" text="Controle de Estoque HyperTech">
+         <font><Font name="System Bold" size="24.0" /></font>
+      </Label>
+
+      <Pane layoutX="20.0" layoutY="70.0" prefHeight="80.0" prefWidth="545.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="15.0" layoutY="10.0" text="Filtrar por Categoria:">
+               <font><Font name="System Bold" size="12.0" /></font>
+            </Label>
+            <ComboBox fx:id="cbCategoriaFiltro" layoutX="15.0" layoutY="35.0" onAction="#filtrarPorCategoria" prefWidth="200.0" promptText="Selecione..." />
+            
+            <Label layoutX="240.0" layoutY="15.0" text="Total Itens Diferentes:" />
+            <Label fx:id="lblTotalItens" layoutX="370.0" layoutY="15.0" text="0" textFill="#2980b9">
+               <font><Font name="System Bold" size="13.0" /></font>
+            </Label>
+            
+            <Label layoutX="240.0" layoutY="45.0" text="Qtd. Total Estoque:" />
+            <Label fx:id="lblQtdTotal" layoutX="370.0" layoutY="45.0" text="0" textFill="#27ae60">
+               <font><Font name="System Bold" size="13.0" /></font>
+            </Label>
+         </children>
+      </Pane>
+
+      <TableView fx:id="tabelaEstoque" layoutX="20.0" layoutY="165.0" prefHeight="410.0" prefWidth="545.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="40.0" text="ID" />
+          <TableColumn fx:id="colNome" prefWidth="180.0" text="Produto" />
+          <TableColumn fx:id="colCategoria" prefWidth="110.0" text="Categoria" />
+          <TableColumn fx:id="colPreco" prefWidth="85.0" text="Preço" />
+          <TableColumn fx:id="colQuantidade" prefWidth="125.0" text="Qtd. Atual" />
+        </columns>
+      </TableView>
+
+      <Pane layoutX="580.0" layoutY="165.0" prefHeight="410.0" prefWidth="250.0" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="15.0" layoutY="15.0" text="Registrar Movimentação">
+               <font><Font name="System Bold" size="16.0" /></font>
+            </Label>
+            <Separator layoutX="15.0" layoutY="45.0" prefWidth="220.0" />
+            
+            <Label layoutX="15.0" layoutY="65.0" text="Quantidade:" />
+            <TextField fx:id="txtQtdAjuste" layoutX="15.0" layoutY="85.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: 10 ou -5" />
+            
+            <Label layoutX="15.0" layoutY="130.0" text="Cód. Vendedor / Gerente:" />
+            <TextField fx:id="txtCodUsuario" layoutX="15.0" layoutY="150.0" prefHeight="30.0" prefWidth="220.0" />
+            
+            <Label layoutX="15.0" layoutY="195.0" text="Motivo / Observação:" />
+            <TextArea fx:id="txtMotivoAjuste" layoutX="15.0" layoutY="215.0" prefHeight="80.0" prefWidth="220.0" wrapText="true" />
+            
+            <Button fx:id="btnEntrada" layoutX="15.0" layoutY="315.0" onAction="#handleEntrada" prefHeight="35.0" prefWidth="105.0" style="-fx-background-color: #27ae60;" text="ENTRADA" textFill="white">
+               <font><Font name="System Bold" size="12.0" /></font>
+            </Button>
+            
+            <Button fx:id="btnSaida" layoutX="130.0" layoutY="315.0" onAction="#handleSaida" prefHeight="35.0" prefWidth="105.0" style="-fx-background-color: #e67e22;" text="SAÍDA" textFill="white">
+               <font><Font name="System Bold" size="12.0" /></font>
+            </Button>
+            
+            <Label layoutX="15.0" layoutY="365.0" prefHeight="35.0" prefWidth="220.0" text="Selecione um item na tabela antes de registrar." textAlignment="CENTER" textFill="#7f8c8d" wrapText="true">
+               <font><Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      <ImageView fitHeight="60.0" fitWidth="120.0" layoutX="710.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Downloads/Logo%20HyperTech.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

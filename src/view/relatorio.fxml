@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RelatorioController">
+   <children>
+      <TabPane layoutX="20.0" layoutY="20.0" prefHeight="550.0" prefWidth="810.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <tabs>
+          <Tab text="Extrato de Compras">
+            <AnchorPane>
+               <children>
+                  <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#buscarExtrato" text="Selecionar Cliente" />
+                        <Button fx:id="btnVerComprovante" mnemonicParsing="false" onAction="#verComprovante" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" text="Ver Comprovante (NSU)" />
+                     </children>
+                  </HBox>
+                  <SplitPane dividerPositions="0.55" layoutX="10.0" layoutY="50.0" prefHeight="450.0" prefWidth="790.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                    <items>
+                        <TableView fx:id="tabelaVendas">
+                          <columns>
+                            <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+                            <TableColumn fx:id="colData" prefWidth="140.0" text="Data" />
+                            <TableColumn fx:id="colVendedor" prefWidth="110.0" text="Vendedor" />
+                            <TableColumn fx:id="colTotal" prefWidth="90.0" text="Total" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tabelaItens">
+                          <columns>
+                            <TableColumn fx:id="colRef" prefWidth="70.0" text="Ref" />
+                            <TableColumn fx:id="colDesc" prefWidth="130.0" text="Produto" />
+                            <TableColumn fx:id="colQtd" prefWidth="50.0" text="Qtd" />
+                            <TableColumn fx:id="colSub" prefWidth="80.0" text="Subtotal" />
+                          </columns>
+                        </TableView>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+          </Tab>
+          
+          <Tab text="Financeiro / Fechamento">
+            <AnchorPane>
+                <children>
+                  <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <VBox spacing="15.0" style="-fx-padding: 20;">
+                           <children>
+                              <Label text="Fechamento de Caixa HyperTech" style="-fx-text-fill: #2c3e50;">
+                                 <font><Font name="System Bold" size="22.0" /></font>
+                              </Label>
+                              
+                              <GridPane hgap="20.0" vgap="10.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lblSaldoInicial" text="Saldo Inicial: R$ 0,00" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                    <Label fx:id="lblVendasDinheiro" text="Vendas Dinheiro: R$ 0,00" textFill="#27ae60" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                       <font><Font name="System Bold" size="13.0" /></font>
+                                    </Label>
+                                    <Label fx:id="lblCartaoDebito" text="Total Débito: R$ 0,00" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                    <Label fx:id="lblCartaoCredito" text="Total Crédito: R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+
+                              <Separator prefWidth="500.0" />
+                              
+                              <Label text="Sugestão de Retirada (Gaveta):" style="-fx-font-weight: bold;" />
+                              <Label fx:id="lblSugestaoRetirada" text="R$ 0,00" style="-fx-background-color: #ecf0f1; -fx-padding: 10;">
+                                 <font><Font name="System Bold" size="20.0" /></font>
+                              </Label>
+
+                              <Label text="Resumo de Bandeiras:" />
+                              <Label fx:id="lblBandeiras" text="..." wrapText="true" maxWidth="600.0" style="-fx-font-style: italic;" />
+
+                              <Separator prefWidth="500.0" />
+
+                              <HBox spacing="15.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#atualizarResumoFinanceiro" prefHeight="40.0" text="Atualizar Dados" />
+                                    <Button mnemonicParsing="false" onAction="#gerarRelatorioDetalhado" prefHeight="40.0" style="-fx-background-color: #34495e; -fx-text-fill: white;" text="GERAR RELATÓRIO OPERACIONAL (FECHAR DIA)" />
+                                 </children>
+                              </HBox>
+                              
+                              <Label text="* O relatório detalhado incluirá a lista de todos os pedidos finalizados hoje." textFill="#7f8c8d">
+                                 <font><Font size="11.0" /></font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                </children>
+            </AnchorPane>
+          </Tab>
+          
+          <Tab text="Logs do Sistema">
+            <AnchorPane>
+                <children>
+                    <TextArea fx:id="areaLogs" editable="false" prefHeight="450.0" prefWidth="740.0" style="-fx-font-family: 'Courier New';" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                </children>
+            </AnchorPane>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

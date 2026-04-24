@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+      
+      <TextField fx:id="txtLogin" layoutX="275.0" layoutY="215.0" onKeyPressed="#verificarTecla" prefHeight="40.0" prefWidth="250.0" promptText="Digite seu Usuário" />
+      <PasswordField fx:id="txtSenha" layoutX="275.0" layoutY="275.0" onKeyPressed="#verificarTecla" prefHeight="40.0" prefWidth="250.0" promptText="Digite sua Senha" />
+      
+      <Button layoutX="275.0" layoutY="345.0" mnemonicParsing="false" onAction="#fazerLogin" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Acessar Sistema">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="250.0" layoutX="269.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/Logo%20HyperTech.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

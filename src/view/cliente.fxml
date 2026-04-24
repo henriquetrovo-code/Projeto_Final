@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteController">
+   <children>
+      <Label layoutX="20.0" layoutY="20.0" text="Consulta de Clientes">
+         <font><Font name="System Bold" size="24.0" /></font>
+      </Label>
+      
+      <TextField fx:id="txtFiltroCliente" layoutX="20.0" layoutY="70.0" onKeyPressed="#verificarEnter" prefHeight="35.0" prefWidth="560.0" promptText="Digite nome ou CPF e aperte ENTER para filtrar..." />
+      
+      <Label layoutX="20.0" layoutY="110.0" text="Selecione o cliente e aperte ENTER para ver detalhes" textFill="#757575">
+         <font><Font name="System Italic" size="12.0" /></font>
+      </Label>
+
+      <TableView fx:id="tabelaClientes" layoutX="20.0" layoutY="130.0" onKeyPressed="#verificarEnter" prefHeight="450.0" prefWidth="560.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="60.0" text="ID" />
+          <TableColumn fx:id="colNome" prefWidth="240.0" text="Nome do Cliente" />
+          <TableColumn fx:id="colCpfCnpj" prefWidth="140.0" text="CPF/CNPJ" />
+          <TableColumn fx:id="colTelefone" prefWidth="115.0" text="Telefone" />
+        </columns>
+      </TableView>
+      
+      <ImageView fitHeight="94.0" fitWidth="147.0" layoutX="439.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/Logo%20HyperTech.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

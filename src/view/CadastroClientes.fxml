@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteController">
+   <children>
+      <Label layoutX="30.0" layoutY="20.0" text="Gerenciamento de Clientes" textFill="#2e7d32">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="30.0" layoutY="70.0" text="Nome Completo / Razão Social:">
+         <font><Font name="System Bold" size="12.0" /></font>
+      </Label>
+      <TextField fx:id="txtNome" layoutX="30.0" layoutY="90.0" prefHeight="35.0" prefWidth="400.0" promptText="Digite o nome completo..." />
+      
+      <Label layoutX="30.0" layoutY="140.0" text="Tipo de Pessoa:" />
+      <ComboBox fx:id="cbTipo" layoutX="30.0" layoutY="160.0" prefHeight="35.0" prefWidth="190.0" promptText="Selecione..." />
+      
+      <Label layoutX="240.0" layoutY="140.0" text="CPF / CNPJ:" />
+      <TextField fx:id="txtCpfCnpj" layoutX="240.0" layoutY="160.0" prefHeight="35.0" prefWidth="190.0" />
+      
+      <Label layoutX="30.0" layoutY="210.0" text="E-mail de Contato:" />
+      <TextField fx:id="txtEmail" layoutX="30.0" layoutY="230.0" prefHeight="35.0" prefWidth="400.0" />
+      
+      <Label layoutX="30.0" layoutY="280.0" text="Telefone:" />
+      <TextField fx:id="txtTelefone" layoutX="30.0" layoutY="300.0" prefHeight="35.0" prefWidth="190.0" />
+      
+      <Label layoutX="240.0" layoutY="280.0" text="CEP:" />
+      <TextField fx:id="txtCep" layoutX="240.0" layoutY="300.0" prefHeight="35.0" prefWidth="190.0" />
+      
+      <Label layoutX="30.0" layoutY="350.0" text="Endereço Completo:" />
+      <TextArea fx:id="txtEndereco" layoutX="30.0" layoutY="370.0" prefHeight="80.0" prefWidth="400.0" wrapText="true" />
+
+      <Button layoutX="30.0" layoutY="480.0" onAction="#salvarCliente" prefHeight="45.0" prefWidth="190.0" style="-fx-background-color: #388e3c; -fx-text-fill: white;" text="SALVAR CLIENTE">
+         <font><Font name="System Bold" size="14.0" /></font>
+      </Button>
+      
+      <Button layoutX="240.0" layoutY="480.0" onAction="#limparCampos" prefHeight="45.0" prefWidth="190.0" style="-fx-background-color: #757575; -fx-text-fill: white;" text="LIMPAR" />
+
+      <Label layoutX="460.0" layoutY="70.0" text="Pesquisar Cliente:">
+          <font><Font name="System Bold" size="12.0" /></font>
+      </Label>
+      <TextField fx:id="txtFiltroCliente" layoutX="460.0" layoutY="90.0" onKeyReleased="#filtrarClientes" prefHeight="35.0" prefWidth="600.0" promptText="Digite para filtrar por nome ou documento..." />
+      
+      <TableView fx:id="tabelaClientes" layoutX="460.0" layoutY="140.0" prefHeight="360.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="colNome" prefWidth="250.0" text="Nome / Razão Social" />
+          <TableColumn fx:id="colCpfCnpj" prefWidth="150.0" text="CPF/CNPJ" />
+          <TableColumn fx:id="colTelefone" prefWidth="145.0" text="Telefone" />
+        </columns>
+      </TableView>
+
+      <Button layoutX="460.0" layoutY="510.0" mnemonicParsing="false" onAction="#prepararEdicao" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #f39c12; -fx-text-fill: white;" text="EDITAR DADOS">
+         <font><Font name="System Bold" size="12.0" /></font>
+      </Button>
+
+      <Button layoutX="600.0" layoutY="510.0" mnemonicParsing="false" onAction="#excluirCliente" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="EXCLUIR CLIENTE">
+         <font><Font name="System Bold" size="12.0" /></font>
+      </Button>
+      
+      <Label layoutX="460.0" layoutY="565.0" text="Dica: Clique duplo no cliente para ver a Ficha Completa e Histórico." textFill="#1a237e">
+         <font><Font name="System Italic" size="12.0" /></font>
+      </Label>
+
+      <ImageView fitHeight="70.0" fitWidth="120.0" layoutX="940.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Logo%20HyperTech.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

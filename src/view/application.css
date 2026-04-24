@@ -1,0 +1,33 @@
+/* 1. FUNDO GERAL (A logo que vai aparecer no lado direito) */
+.root {
+    -fx-background-color: #f4f4f4; /* Um cinza bem clarinho de fundo */
+    -fx-background-image: url('Fundo_HyperTech.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 40%; /* Ajuste aqui se a logo ficar muito grande */
+}
+
+/* 2. BARRA LATERAL (Mantendo a cor que você já aprovou) */
+.sidebar {
+    -fx-background-color: #34495e; /* Cor escura que você está usando */
+    -fx-opacity: 1.0;
+}
+
+/* 3. A "MÁGICA" PARA O LADO DIREITO
+ * Forçamos todas as telas que abrem no centro a serem transparentes.
+ * Se elas forem transparentes, a logo do .root (lá do item 1) aparece.
+ */
+.anchor-pane, .scroll-pane, .stack-pane, .border-pane {
+    -fx-background-color: transparent !important;
+}
+
+/* Garante que campos de texto e botões continuem brancos/visíveis */
+.text-field, .password-field, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+}
+
+.button-menu {
+    -fx-background-color: #ecf0f1;
+    -fx-text-fill: #2c3e50;
+}

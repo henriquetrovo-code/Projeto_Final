@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProdutosController">
+   <children>
+      <Label layoutX="30.0" layoutY="20.0" text="Cadastro de Novo Produto " textFill="#1565c0">
+         <font><Font name="System Bold" size="20.0" /></font>
+      </Label>
+      
+      <Label layoutX="30.0" layoutY="70.0" text="Descrição:" />
+      <TextField fx:id="txtDescricao" layoutX="30.0" layoutY="90.0" prefWidth="540.0" />
+      
+      <Label layoutX="30.0" layoutY="140.0" text="Código de Barras:" />
+      <TextField fx:id="txtCodigoBarras" layoutX="30.0" layoutY="160.0" prefWidth="260.0" />
+      
+      <Label layoutX="310.0" layoutY="140.0" text="Categoria:" />
+      <TextField fx:id="txtCategoria" layoutX="310.0" layoutY="160.0" prefWidth="260.0" />
+      
+      <Label layoutX="30.0" layoutY="210.0" text="Custo R$:" />
+      <TextField fx:id="txtPrecoCusto" layoutX="30.0" layoutY="230.0" onKeyReleased="#calcularPrecoVenda" prefWidth="170.0" />
+      
+      <Label layoutX="215.0" layoutY="210.0" text="Margem %:" />
+      <TextField fx:id="txtMargem" layoutX="215.0" layoutY="230.0" onKeyReleased="#calcularPrecoVenda" prefWidth="170.0" />
+      
+      <Label layoutX="400.0" layoutY="210.0" text="Venda R$:" />
+      <TextField fx:id="txtPrecoVenda" layoutX="400.0" layoutY="230.0" prefWidth="170.0" />
+      
+      <Label layoutX="30.0" layoutY="280.0" text="Estoque Inicial:" />
+      <TextField fx:id="txtEstoque" layoutX="30.0" layoutY="300.0" prefWidth="260.0" />
+      
+      <Label layoutX="310.0" layoutY="280.0" text="Estoque Mínimo:" />
+      <TextField fx:id="txtMinimo" layoutX="310.0" layoutY="300.0" prefWidth="260.0" />
+
+      <Button layoutX="30.0" layoutY="380.0" onAction="#salvarProduto" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #1976d2; -fx-text-fill: white;" text="SALVAR PRODUTO">
+         <font><Font name="System Bold" size="14.0" /></font>
+      </Button>
+      <ImageView fitHeight="73.0" fitWidth="143.0" layoutX="453.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/Logo%20HyperTech.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

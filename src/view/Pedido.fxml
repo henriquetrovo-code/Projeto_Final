@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PedidoController">
+   <children>
+      <Label layoutX="30.0" layoutY="20.0" text="PDV HyperTech - Frente de Caixa">
+         <font><Font name="System Bold" size="24.0" /></font>
+      </Label>
+      
+      <Label layoutX="30.0" layoutY="70.0" text="Cliente Selecionado:" />
+      <TextField fx:id="txtNomeCliente" editable="false" layoutX="30.0" layoutY="90.0" prefWidth="350.0" promptText="Nenhum cliente selecionado..." />
+      <Button fx:id="btnBuscarCliente" layoutX="390.0" layoutY="90.0" onAction="#abrirBuscaCliente" text="🔍 Buscar Cliente" />
+
+      <Label layoutX="30.0" layoutY="140.0" text="Produto Selecionado:" />
+      <TextField fx:id="txtNomeProduto" editable="false" layoutX="30.0" layoutY="160.0" prefWidth="320.0" promptText="Busque um produto..." />
+      <Button fx:id="btnBuscarProduto" layoutX="355.0" layoutY="160.0" onAction="#abrirBuscaProduto" text="🔍" />
+      
+      <Label layoutX="425.0" layoutY="140.0" text="Qtd:" />
+      <TextField fx:id="txtQtdProduto" layoutX="425.0" layoutY="160.0" onAction="#adicionarItem" prefWidth="50.0" text="1" />
+
+      <Label layoutX="485.0" layoutY="140.0" text="Desc. Item %:" textFill="#2e7d32">
+         <font><Font name="System Bold" size="12.0" /></font>
+      </Label>
+      <TextField fx:id="txtDescontoItem" layoutX="485.0" layoutY="160.0" onAction="#adicionarItem" prefWidth="65.0" text="0" />
+
+      <Button fx:id="btnAdicionarItem" layoutX="565.0" layoutY="160.0" onAction="#adicionarItem" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Adicionar ao Carrinho (Enter)">
+         <font><Font name="System Bold" size="12.0" /></font>
+      </Button>
+
+      <TableView fx:id="tabelaCarrinho" layoutX="30.0" layoutY="210.0" prefHeight="180.0" prefWidth="790.0">
+        <columns>
+          <TableColumn fx:id="colCodigo" prefWidth="100.0" text="Código/Ref" />
+          <TableColumn fx:id="colDescricao" prefWidth="320.0" text="Descrição do Produto" />
+          <TableColumn fx:id="colQtd" prefWidth="80.0" text="Qtd." />
+          <TableColumn fx:id="colPrecoUnitario" prefWidth="120.0" text="Valor Unit." />
+          <TableColumn fx:id="colSubtotal" prefWidth="150.0" text="Subtotal" />
+        </columns>
+      </TableView>
+
+      <Label layoutX="30.0" layoutY="410.0" text="Forma de Pagamento 1:" />
+      <ComboBox fx:id="cbPagamento1" layoutX="30.0" layoutY="430.0" prefWidth="160.0" />
+      <TextField fx:id="txtValorPag1" layoutX="200.0" layoutY="430.0" prefWidth="90.0" promptText="Valor R$" />
+      <ComboBox fx:id="cbParcelas1" layoutX="300.0" layoutY="430.0" prefWidth="180.0" visible="false" />
+
+      <Label layoutX="30.0" layoutY="470.0" text="Forma de Pagamento 2:" />
+      <ComboBox fx:id="cbPagamento2" layoutX="30.0" layoutY="490.0" prefWidth="160.0" />
+      <TextField fx:id="txtValorPag2" layoutX="200.0" layoutY="490.0" prefWidth="90.0" promptText="Valor R$" />
+      <ComboBox fx:id="cbParcelas2" layoutX="300.0" layoutY="490.0" prefWidth="180.0" visible="false" />
+
+      <Label layoutX="30.0" layoutY="540.0" text="Cód. Vendedor:" textFill="#d32f2f">
+         <font><Font name="System Bold" size="12.0" /></font>
+      </Label>
+      <TextField fx:id="txtCodVendedor" layoutX="130.0" layoutY="535.0" onAction="#finalizarVenda" prefWidth="100.0" />
+
+      <Label layoutX="550.0" layoutY="400.0" text="DESC. GERAL (%):" textFill="#1565c0">
+         <font><Font name="System Bold" size="14.0" /></font>
+      </Label>
+      <TextField fx:id="txtDesconto" layoutX="720.0" layoutY="398.0" onAction="#finalizarVenda" prefWidth="50.0" text="0" />
+
+      <Label layoutX="550.0" layoutY="435.0" text="TOTAL FINAL:">
+         <font><Font size="18.0" /></font>
+      </Label>
+      <Label fx:id="lblTotalPedido" layoutX="550.0" layoutY="460.0" text="R$ 0,00" textFill="#e53935">
+         <font><Font name="System Bold" size="36.0" /></font>
+      </Label>
+      
+      <Button fx:id="btnFinalizarVenda" layoutX="550.0" layoutY="530.0" onAction="#finalizarVenda" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2e7d32; -fx-text-fill: white;" text="FINALIZAR E FATURAR">
+         <font><Font name="System Bold" size="16.0" /></font>
+      </Button>
+   </children>
+</AnchorPane>
