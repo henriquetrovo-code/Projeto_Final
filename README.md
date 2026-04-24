@@ -47,3 +47,129 @@ Instruções para Avaliação (Professor Carlos Guilherme) O usuário e senha in
 O fluxo de venda pode ser testado selecionando múltiplos produtos e combinando formas de pagamento.
 
 O bloqueio de estoque pode ser validado tentando vender uma quantidade superior à disponível após a entrada de mercadoria.
+
+
+CÓDIGO BANCO DE DADOS:
+
+CREATE DATABASE eletrotech;
+USE eletrotech;
+
+-- 2. Tabela de Funcionários (Usuários)
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(50) NOT NULL,
+    perfil ENUM('Gerente', 'Vendedor', 'Caixa') NOT NULL
+) ENGINE=InnoDB;
+
+-- 3. Tabela de Clientes
+CREATE TABLE clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo_pessoa ENUM('Fisica', 'Juridica') NOT NULL,
+    cpf_cnpj VARCHAR(20) UNIQUE,
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    endereco_completo TEXT,
+    cep VARCHAR(10),
+    status_conta ENUM('Ativo', 'Inativo') DEFAULT 'Ativo',
+    saldo_credito DECIMAL(10,2) DEFAULT 0.00
+) ENGINE=InnoDB;
+
+-- 4. Tabela de Produtos
+CREATE TABLE produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(150) NOT NULL,
+    referencia VARCHAR(50),
+    codigo_barras VARCHAR(50) UNIQUE,
+    categoria VARCHAR(50),
+    preco_custo DECIMAL(10,2) NOT NULL,
+    margem_lucro DECIMAL(5,2),
+    preco_venda DECIMAL(10,2) NOT NULL,
+    quantidade_estoque INT DEFAULT 0,
+    estoque_minimo INT DEFAULT 5
+) ENGINE=InnoDB;
+
+-- 5. Tabela de Vendas (Cabeçalho)
+-- Status inicial: 'Pendente' para o faturamento posterior no Caixa
+CREATE TABLE vendas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT,
+    vendedor_codigo INT,
+    data_venda TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_venda DECIMAL(10,2) NOT NULL,
+    desconto_aplicado DECIMAL(10,2) DEFAULT 0.00,
+    status_venda ENUM('Pendente', 'Finalizada', 'Cancelada') DEFAULT 'Pendente',
+    CONSTRAINT fk_venda_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    CONSTRAINT fk_venda_vendedor FOREIGN KEY (vendedor_codigo) REFERENCES usuarios(id)
+) ENGINE=InnoDB;
+
+-- 6. Tabela de Itens da Venda
+CREATE TABLE itens_venda (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    venda_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    CONSTRAINT fk_item_venda FOREIGN KEY (venda_id) REFERENCES vendas(id) ON DELETE CASCADE,
+    CONSTRAINT fk_item_produto FOREIGN KEY (produto_id) REFERENCES produtos(id)
+) ENGINE=InnoDB;
+
+-- 7. Tabela de Pagamentos
+CREATE TABLE pagamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    venda_id INT NOT NULL,
+    forma_pagamento VARCHAR(50) NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    CONSTRAINT fk_pagamento_venda FOREIGN KEY (venda_id) REFERENCES vendas(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- Ajustando a tabela de pagamentos para suportar parcelas de boleto
+ALTER TABLE pagamentos ADD COLUMN data_vencimento DATE AFTER valor;
+ALTER TABLE pagamentos ADD COLUMN status_pagamento ENUM('Pendente', 'Pago') DEFAULT 'Pendente' AFTER data_vencimento;
+ALTER TABLE pagamentos ADD COLUMN numero_parcela INT AFTER status_pagamento;
+
+-- 8. Logs de Auditoria
+CREATE TABLE logs_sistema (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    venda_id INT,
+    produto_id INT,
+    vendedor_codigo INT,
+    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipo_acao VARCHAR(50), 
+    quantidade INT,
+    motivo_cancelamento TEXT,
+    CONSTRAINT fk_log_vendedor FOREIGN KEY (vendedor_codigo) REFERENCES usuarios(id)
+) ENGINE=InnoDB;
+
+INSERT INTO usuarios (nome, login, senha, perfil) 
+VALUES ('Henrique Trovo', 'Henrique', 'admin123', 'Gerente');
+
+-- Adicionando as colunas que faltam para o sistema HyperTech
+ALTER TABLE vendas ADD COLUMN bandeira_cartao VARCHAR(50) AFTER status_venda;
+ALTER TABLE vendas ADD COLUMN nsu_comprovante VARCHAR(50) AFTER bandeira_cartao;
+
+CREATE TABLE log_estoque (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    produto_id INT,
+    vendedor_id INT,
+    tipo_movimentacao ENUM('ENTRADA', 'SAIDA', 'CANCELAMENTO', 'AJUSTE') NOT NULL,
+    quantidade INT NOT NULL,
+    data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    motivo VARCHAR(255),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    FOREIGN KEY (vendedor_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE controle_caixa (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data_operacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipo ENUM('ABERTURA', 'RETIRADA') NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    vendedor_id INT,
+    observacao TEXT,
+    FOREIGN KEY (vendedor_id) REFERENCES usuarios(id)
+);
+
